@@ -33,6 +33,5 @@
   "spellright.documentTypes": [
     "latex",
     "plaintext"
-  ],
-  "lldb.library": "/Applications/Xcode-13.2.1.app/Contents/SharedFrameworks/LLDB.framework/Versions/A/LLDB"
+  ]
 }
