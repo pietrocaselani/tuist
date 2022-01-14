@@ -46,10 +46,8 @@ module Fourier
     desc "encrypt", "Encrypt content in the repository"
     subcommand "encrypt", Commands::Encrypt
 
-    desc "focus TARGETS", "Generate Tuist's project focusing on the target TARGET"
-    def focus(*targets)
-      Services::Focus.call(targets: targets)
-    end
+    desc "focus TARGETS", "Generate Tuist's project focusing on the targets TARGETS"
+    subcommand "focus", Commands::Focus
 
     desc "tuist", "Runs Tuist"
     def tuist(*arguments)

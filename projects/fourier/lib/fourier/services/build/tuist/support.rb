@@ -5,8 +5,8 @@ module Fourier
     module Build
       module Tuist
         class Support < Base
-          def call
-            Utilities::System.tuist("build", "TuistSupport")
+          def self.run(from_source: false)
+            Utilities::System.tuist("build", "TuistSupport", from_source: from_source)
           end
         end
       end

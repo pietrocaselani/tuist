@@ -5,10 +5,10 @@ module Fourier
     module Build
       module Tuist
         class All < Base
-          def call
+          def self.run(from_source: false)
             dependencies = ["dependencies", "fetch"]
-            Utilities::System.tuist(*dependencies)
-            Utilities::System.tuist("build", "--generate")
+            Utilities::System.tuist(*dependencies, from_source: from_source)
+            Utilities::System.tuist("build", "--generate", from_source: from_source)
           end
         end
       end
