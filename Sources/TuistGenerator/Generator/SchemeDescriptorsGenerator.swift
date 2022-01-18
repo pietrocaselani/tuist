@@ -669,7 +669,7 @@ final class SchemeDescriptorsGenerator: SchemeDescriptorsGenerating {
     func schemeExecutionAction(action: ExecutionAction,
                                graphTraverser: GraphTraversing,
                                generatedProjects: [AbsolutePath: GeneratedProject],
-                               rootPath _: AbsolutePath) throws -> XCScheme.ExecutionAction
+                               rootPath: AbsolutePath) throws -> XCScheme.ExecutionAction
     {
         guard
             let targetReference = action.target,
@@ -681,7 +681,8 @@ final class SchemeDescriptorsGenerator: SchemeDescriptorsGenerating {
         return schemeExecutionAction(
             action: action,
             target: graphTarget.target,
-            generatedProject: generatedProject
+            generatedProject: generatedProject,
+            rootPath: rootPath
         )
     }
 
@@ -702,16 +703,19 @@ final class SchemeDescriptorsGenerator: SchemeDescriptorsGenerating {
     /// - Returns: Scheme actions.
     private func schemeExecutionAction(action: ExecutionAction,
                                        target: Target,
-                                       generatedProject: GeneratedProject) -> XCScheme.ExecutionAction
+                                       generatedProject: GeneratedProject,
+                                       rootPath: AbsolutePath) -> XCScheme.ExecutionAction
     {
         /// Return Buildable Reference for Scheme Action
         func schemeBuildableReference(target: Target, generatedProject: GeneratedProject) -> XCScheme.BuildableReference? {
             guard let pbxTarget = generatedProject.targets[target.name] else { return nil }
 
+            let relativeProjectPath = generatedProject.path.relative(to: rootPath)
+
             return targetBuildableReference(
                 target: target,
                 pbxTarget: pbxTarget,
-                projectPath: generatedProject.name
+                projectPath: relativeProjectPath.pathString
             )
         }
 
